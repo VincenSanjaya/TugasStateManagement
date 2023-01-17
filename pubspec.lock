@@ -55,22 +55,15 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  flutter_lints:
-    dependency: "direct dev"
-    description:
-      name: flutter_lints
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "2.0.1"
   flutter_test:
     dependency: "direct dev"
     description: flutter
     source: sdk
     version: "0.0.0"
-  lints:
-    dependency: transitive
+  gap:
+    dependency: "direct main"
     description:
-      name: lints
+      name: gap
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tugas_state_management/screen/register_screen.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -165,7 +166,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 width: 5,
               ),
               GestureDetector(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => RegisterScreen()));
+                },
                 child: Container(
                   child: const Text("Sign Up", style: TextStyle(
                       fontWeight: FontWeight.w900

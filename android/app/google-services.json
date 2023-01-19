@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "344513172792",
+    "project_id": "state-management-3ed03",
+    "storage_bucket": "state-management-3ed03.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:344513172792:android:2a0e7b007450c47a285dcd",
+        "android_client_info": {
+          "package_name": "com.example.tugas_state_management"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "344513172792-amssnd0unvg0s4fji236ht5he7uq261s.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJXg8PXIy2rsaKGUrDCq9TeC6WMI5vRn4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "344513172792-amssnd0unvg0s4fji236ht5he7uq261s.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

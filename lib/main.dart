@@ -1,9 +1,13 @@
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:tugas_state_management/screen/login_screen.dart';
+import 'package:tugas_state_management/screen/register_screen.dart';
 
 import 'utils/theme.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -20,7 +24,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: primaryBlack,
         fontFamily: 'Montserrat',
       ),
-      home: LoginScreen()
+      home: RegisterScreen()
     );
   }
 }

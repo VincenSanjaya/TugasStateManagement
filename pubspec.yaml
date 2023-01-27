@@ -44,6 +44,8 @@ dependencies:
   flutter_svg: ^1.1.6
   image_picker: ^0.8.6
   provider: ^6.0.5
+  flutter_bloc: ^8.1.1
+  equatable: ^2.0.5
 
 dev_dependencies:
   flutter_test:

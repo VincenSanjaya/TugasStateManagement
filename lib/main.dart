@@ -1,10 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas_state_management/nba_bloc.dart';
 import 'package:tugas_state_management/provider/user_provider.dart';
+import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
 import 'package:tugas_state_management/screen/login_screen.dart';
 import 'utils/theme.dart';
@@ -25,6 +27,24 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => NbaBloc()..add(LoadNbaCounter()))
       ],
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData.light().copyWith(
+          scaffoldBackgroundColor: Colors.white,
+        ),
+        title: 'Tugas State Management',
+        // home: const ResponsiveLayout(
+        //     mobileScreenLayout: MobileScreenLayout(),
+        //     webScreenLayout: WebScreenLayout())
+        home: StreamBuilder(
+            stream: FirebaseAuth.instance.authStateChanges(),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.active) {
+                if (snapshot.hasData) {
+                  return BottomNavigation();
+                } else if (snapshot.hasError) {
+                  return Center(
+                    child: Text(snapshot.error.toString()),
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(

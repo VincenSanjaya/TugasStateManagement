@@ -44,6 +44,10 @@ dependencies:
   flutter_svg: ^1.1.6
   image_picker: ^0.8.6
   provider: ^6.0.5
+  get: ^4.6.5
+  date_field: ^3.0.2
+  syncfusion_flutter_datepicker: ^20.4.44
+  curved_navigation_bar: ^1.0.3
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
 

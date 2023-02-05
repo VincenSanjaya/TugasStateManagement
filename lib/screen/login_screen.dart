@@ -1,7 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tugas_state_management/resources/auth_method.dart';
+import 'package:tugas_state_management/screen/bottom_navigation.dart';
+import 'package:tugas_state_management/screen/home.dart';
 import 'package:tugas_state_management/screen/register_screen.dart';
+import 'package:tugas_state_management/utils/utils.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -14,9 +20,21 @@ class _LoginScreenState extends State<LoginScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
 
+  void loginUser() async {
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'Success Sign In') {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()));
+    } else {
+      showSnackBar(res, context);
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 32),
@@ -83,7 +101,9 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                loginUser();
+              },
               child: Text(
                 'LOGIN',
                 style: TextStyle(
@@ -118,7 +138,7 @@ class _LoginScreenState extends State<LoginScreen> {
           Container(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: () {},
+              onPressed: (){},
               child: Row(
 
                 mainAxisAlignment: MainAxisAlignment.spaceAround,

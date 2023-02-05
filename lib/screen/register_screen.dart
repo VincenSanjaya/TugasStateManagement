@@ -3,6 +3,7 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
 
@@ -51,7 +52,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     if (res == 'Success Sign In') {
       Navigator.of(context).pushReplacement(
-          MaterialPageRoute(builder: (context) => HomeScreen()));
+          MaterialPageRoute(builder: (context) => BottomNavigation()));
     } else {
       showSnackBar(res, context);
     }
@@ -68,6 +69,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      resizeToAvoidBottomInset: false,
         body: SafeArea(
             child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 32),

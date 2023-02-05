@@ -1,8 +1,10 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'package:tugas_state_management/provider/user_provider.dart';
+import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
 import 'package:tugas_state_management/screen/login_screen.dart';
 import 'utils/theme.dart';
@@ -23,12 +25,12 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (_) => UserProvider()),
       ],
-      child: MaterialApp(
+      child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData.light().copyWith(
           scaffoldBackgroundColor: Colors.white,
         ),
-        title: 'Instagram Clone',
+        title: 'Tugas State Management',
         // home: const ResponsiveLayout(
         //     mobileScreenLayout: MobileScreenLayout(),
         //     webScreenLayout: WebScreenLayout())
@@ -37,7 +39,7 @@ class MyApp extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.active) {
                 if (snapshot.hasData) {
-                  return HomeScreen();
+                  return BottomNavigation();
                 } else if (snapshot.hasError) {
                   return Center(
                     child: Text(snapshot.error.toString()),

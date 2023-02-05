@@ -77,7 +77,7 @@ class _EditPageState extends State<EditPage> {
               height: 50,
               child: TextField(
                 readOnly: true,
-                controller: controllerImage..text = "${Get.arguments['profile']}",
+                controller: controllerImage..text = "${Get.arguments['profile'].toString()}",
                 decoration: InputDecoration(
                   border: InputBorder.none,
                   icon: IconButton(onPressed: () async {
@@ -159,14 +159,8 @@ class _EditPageState extends State<EditPage> {
               height: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  if(ImageUrl.isEmpty)
-                  {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Please Upload Image'),
-                      ),
-                    );
-                    return;
+                  if(ImageUrl == " "){
+                    ImageUrl = Get.arguments['profile'].toString();
                   }
                   final user = User(
                     name: controllerName.text,
@@ -181,7 +175,7 @@ class _EditPageState extends State<EditPage> {
                     ),
                   );
                 },
-                child: const Text('Tambah'),
+                child: const Text('Edit'),
               ),
             ),
           ],

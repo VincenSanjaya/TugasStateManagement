@@ -27,31 +27,13 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => NbaBloc()..add(LoadNbaCounter()))
       ],
-      child: GetMaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData.light().copyWith(
-          scaffoldBackgroundColor: Colors.white,
-        ),
-        title: 'Tugas State Management',
-        // home: const ResponsiveLayout(
-        //     mobileScreenLayout: MobileScreenLayout(),
-        //     webScreenLayout: WebScreenLayout())
-        home: StreamBuilder(
-            stream: FirebaseAuth.instance.authStateChanges(),
-            builder: (context, snapshot) {
-              if (snapshot.connectionState == ConnectionState.active) {
-                if (snapshot.hasData) {
-                  return BottomNavigation();
-                } else if (snapshot.hasError) {
-                  return Center(
-                    child: Text(snapshot.error.toString()),
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(
             create: (context) => UserProvider(),
           )
         ],
-        child: MaterialApp(
+        child: GetMaterialApp(
           debugShowCheckedModeBanner: false,
           theme: ThemeData.light().copyWith(
             scaffoldBackgroundColor: Colors.white,
@@ -65,7 +47,7 @@ class MyApp extends StatelessWidget {
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.active) {
                   if (snapshot.hasData) {
-                    return HomeScreen();
+                    return BottomNavigation();
                   } else if (snapshot.hasError) {
                     return Center(
                       child: Text(snapshot.error.toString()),

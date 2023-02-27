@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gap/gap.dart';
-import 'package:tugas_state_management/local-push/local_pushnotfication.dart';
 import 'package:tugas_state_management/resources/auth_method.dart';
 import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
@@ -10,36 +8,34 @@ import 'package:tugas_state_management/utils/utils.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:tugas_state_management/screen/responsive_layout.dart';
-import 'package:tugas_state_management/screen/loginPortrait.dart';
-import 'package:tugas_state_management/screen/login_landscape.dart';
 
-final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
-FlutterLocalNotificationsPlugin();
-
-class LoginScreen extends StatefulWidget {
-  LoginScreen({Key? key}) : super(key: key);
+class loginportrait extends StatefulWidget {
+  loginportrait({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<loginportrait> createState() => _loginportraitState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
-  
-  
+class _loginportraitState extends State<loginportrait> {
+  final TextEditingController _emailController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-    Noti.initialize(flutterLocalNotificationsPlugin);
+  void loginUser() async {
+    String res = await AuthMethods().loginUser(
+        email: _emailController.text, password: _passwordController.text);
+    if (res == 'Success Sign In') {
+      Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => BottomNavigation()));
+    } else {
+      showSnackBar(res, context);
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-        body: SafeArea(
+        body: Center(
             child: Container(
       padding: const EdgeInsets.symmetric(horizontal: 32),
       width: double.infinity,
@@ -107,10 +103,6 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ElevatedButton(
               onPressed: () {
                 loginUser();
-                Noti.showBigTextNotification(
-                    title: "Login Berhasil !",
-                    body: "Selamat Datang Masbro",
-                    fln: flutterLocalNotificationsPlugin);
               },
               child: Text(
                 'LOGIN',
@@ -207,10 +199,7 @@ class _LoginScreenState extends State<LoginScreen> {
             ],
           )
         ],
-      body: ResponsiveLayout(
-        portraitBody: loginportrait(),
-        landscapeBody: loginlandscape(),
       ),
-    );
+    )));
   }
 }

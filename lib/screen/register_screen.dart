@@ -1,8 +1,10 @@
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gap/gap.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:tugas_state_management/local-push/local_pushnotfication.dart';
 import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
@@ -10,6 +12,8 @@ import 'package:tugas_state_management/widget/text-field_input.dart';
 import '../resources/auth_method.dart';
 import '../utils/utils.dart';
 import 'login_screen.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class RegisterScreen extends StatefulWidget {
   RegisterScreen({Key? key}) : super(key: key);
@@ -22,8 +26,16 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final TextEditingController _usernameController = TextEditingController();
+
   Uint8List? _image;
   bool _isLoading = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Noti.initialize(flutterLocalNotificationsPlugin);
+  }
 
   @override
   void dispose() {
@@ -144,7 +156,13 @@ class _RegisterScreenState extends State<RegisterScreen> {
           Container(
             width: double.infinity,
             child: ElevatedButton(
-              onPressed: signUpUser,
+              onPressed: () {
+                signUpUser();
+                Noti.showBigTextNotification(
+                    title: "Login Berhasil !",
+                    body: "Selamat Datang Masbro",
+                    fln: flutterLocalNotificationsPlugin);
+              },
               child: _isLoading? const Center(child: CircularProgressIndicator(
                 color: Colors.white,
               ),) : const Text(

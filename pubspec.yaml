@@ -50,6 +50,8 @@ dependencies:
   curved_navigation_bar: ^1.0.3
   flutter_bloc: ^8.1.1
   equatable: ^2.0.5
+  firebase_messaging: ^14.2.1
+  flutter_local_notifications: ^13.0.0
 
 dev_dependencies:
   flutter_test:

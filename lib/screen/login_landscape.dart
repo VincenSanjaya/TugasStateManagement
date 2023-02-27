@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gap/gap.dart';
+import 'package:tugas_state_management/local-push/local_pushnotfication.dart';
 import 'package:tugas_state_management/resources/auth_method.dart';
 import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
@@ -8,6 +10,8 @@ import 'package:tugas_state_management/utils/utils.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin = FlutterLocalNotificationsPlugin();
 
 class loginlandscape extends StatefulWidget {
   loginlandscape({Key? key}) : super(key: key);
@@ -19,6 +23,13 @@ class loginlandscape extends StatefulWidget {
 class _loginlandscapeState extends State<loginlandscape> {
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Noti.initialize(flutterLocalNotificationsPlugin);
+  }
 
   void loginUser() async {
     String res = await AuthMethods().loginUser(
@@ -66,7 +77,7 @@ class _loginlandscapeState extends State<loginlandscape> {
           ),
           const Gap(30),
           Container(
-            
+
             child: Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
@@ -84,10 +95,10 @@ class _loginlandscapeState extends State<loginlandscape> {
                         hintText: "Enter Email",
                         textInputType: TextInputType.emailAddress,
                         isPass: false,
-                        
-                      ), 
+
                       ),
-                      
+                      ),
+
                       const Gap(20),
                       Container(
                         width: 300,
@@ -101,9 +112,9 @@ class _loginlandscapeState extends State<loginlandscape> {
                           textInputType: TextInputType.visiblePassword,
                           isPass: true) ,
                       ),
-                      
+
                       const Gap(20),
-                      
+
 
                         Container(
                           alignment: Alignment.centerRight,
@@ -115,28 +126,32 @@ class _loginlandscapeState extends State<loginlandscape> {
                               fontSize: 15,
                               fontWeight: FontWeight.w600,
                             ),
-                            
+
                           ),
                         ),
                     ],
-                  
+
                   ),
                 ),
                 SizedBox(width: 50,),
                 Container(
-                  
+
                   child: Column(
                     children: [
-                      
+
                       Container(
-                        
+
                           width: 300,
                           child: ElevatedButton(
-                            
+
                             onPressed: () {
                               loginUser();
+                              Noti.showBigTextNotification(
+                                  title: "Login Berhasil !",
+                                  body: "Selamat Datang Masbro",
+                                  fln: flutterLocalNotificationsPlugin);
                             },
-                            
+
                             child: Text(
                               'LOGIN',
                               style: TextStyle(
@@ -214,11 +229,11 @@ class _loginlandscapeState extends State<loginlandscape> {
             ),
           ),
 
-          
-          
-          
-          
-          
+
+
+
+
+
           Flexible(child: Container(), flex: 2),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

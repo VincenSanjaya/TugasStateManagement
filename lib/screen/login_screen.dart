@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 import 'package:gap/gap.dart';
+import 'package:tugas_state_management/local-push/local_pushnotfication.dart';
 import 'package:tugas_state_management/resources/auth_method.dart';
 import 'package:tugas_state_management/screen/bottom_navigation.dart';
 import 'package:tugas_state_management/screen/home.dart';
@@ -8,6 +10,9 @@ import 'package:tugas_state_management/utils/utils.dart';
 import 'package:tugas_state_management/widget/text-field_input.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
+
+final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
+FlutterLocalNotificationsPlugin();
 
 class LoginScreen extends StatefulWidget {
   LoginScreen({Key? key}) : super(key: key);
@@ -29,6 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
     } else {
       showSnackBar(res, context);
     }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Noti.initialize(flutterLocalNotificationsPlugin);
   }
 
   @override
@@ -103,6 +115,10 @@ class _LoginScreenState extends State<LoginScreen> {
             child: ElevatedButton(
               onPressed: () {
                 loginUser();
+                Noti.showBigTextNotification(
+                    title: "Login Berhasil !",
+                    body: "Selamat Datang Masbro",
+                    fln: flutterLocalNotificationsPlugin);
               },
               child: Text(
                 'LOGIN',
